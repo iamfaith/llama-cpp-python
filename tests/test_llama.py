@@ -169,3 +169,16 @@ def test_llama_server():
             }
         ],
     }
+
+
+def test_model():
+    # ./main -m ./models/ggml-model-q4_0.bin -p "Q: 广东2018的文科分数线是多少。这个问题的年份和省份分别是多少，用json的方式回答的结果是 A: " -n 12
+    # import os
+    # os.environ["N_THREAD"] = "16"
+    model_path = "/home/faith/llama-cpp-python/vendor/llama.cpp/models/ggml-model-q4_0.bin"
+    llm = llama_cpp.Llama(model_path=model_path, n_threads=16)
+    output = llm("Q: 广东2018的文科分数线是多少。这个问题的年份和省份分别是多少，用json的方式回答的结果是 A: ", max_tokens=12, stop=["Q:", "\n"], echo=True)
+    print(output)
+    
+    
+test_model()
